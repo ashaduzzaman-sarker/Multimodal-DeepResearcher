@@ -1,0 +1,30 @@
+version: '3.8'
+services:
+  deepresearcher:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - GOOGLE_API_KEY=${GOOGLE_API_KEY}
+      - GOOGLE_CSE_ID=${GOOGLE_CSE_ID}
+      - JWT_SECRET_KEY=${JWT_SECRET_KEY}
+      - REDIS_URL=${REDIS_URL}
+    volumes:
+      - ./outputs:/app/outputs
+      - ./data:/app/data
+      - ./templates:/app/templates
+    depends_on:
+      - redis
+    restart: unless-stopped
+
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    restart: unless-stopped
+
+volumes:
+  redis_data:

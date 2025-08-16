@@ -1,0 +1,48 @@
+# Base configuration for the Multimodal DeepResearcher
+system:
+  name: "Multimodal DeepResearcher"
+  version: "2.0.0"
+  debug: false
+  log_level: "INFO"
+model:
+  provider: "openai"  # AI provider (e.g., openai, anthropic, google)
+  name: "google/gemma-3-4b-it:free" # Which AI to use (like choosing a brain)
+  # name: "gpt-4o"
+  temperature: 0.7
+  max_tokens: 4000
+  timeout: 60
+research:
+  max_iterations: 2
+  max_sources_per_query: 10
+  min_source_reliability: 0.7
+  search_engines:
+    - "google"
+    - "arxiv"
+    - "wikipedia"
+  concurrent_requests: 3
+planning:
+  max_sections: 6
+  min_words_per_section: 150
+  required_sections:
+    - "introduction"
+    - "conclusion"
+  optional_sections:
+    - "methodology"
+    - "analysis"
+    - "recommendations"
+visualization:
+  chart_resolution: [1600, 900]
+  style_template: "academic"
+  color_palette: "viridis"
+  max_charts_per_report: 8
+  supported_formats: ["png", "svg", "pdf", "html"]
+output:
+  formats: ["markdown", "html", "pdf"]
+  include_metadata: true
+  include_sources: true
+  timestamp_files: true
+security:
+  rate_limit_requests_per_minute: 30
+  allowed_origins:
+    - "http://localhost:8000"
+    - "https://your-production-domain.com"
