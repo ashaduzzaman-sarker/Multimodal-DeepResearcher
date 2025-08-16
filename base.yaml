@@ -1,0 +1,54 @@
+# Base configuration for the Multimodal Report Generator
+system:
+  name: "Multimodal DeepResearcher"
+  version: "1.0.0"
+  debug: false
+
+model:
+  provider: "google"  # AI provider (e.g., openai, anthropic, google)
+  name: "google/gemma-3-4b-it:free" # Which AI to use (like choosing a brain)
+  # name: "gpt-4o"
+  temperature: 0.7
+  max_tokens: 4000
+  timeout: 30
+
+research:
+  max_iterations: 3
+  max_sources_per_query: 15
+  min_source_reliability: 0.6
+  search_engines:
+    - "google"
+    - "arxiv" 
+    - "wikipedia"
+  concurrent_requests: 5
+
+planning:
+  max_sections: 8
+  min_words_per_section: 200
+  required_sections:
+    - "introduction"
+    - "conclusion"
+  optional_sections:
+    - "methodology"
+    - "analysis"
+    - "recommendations"
+
+visualization:
+  chart_resolution: [1200, 800]
+  style_template: "academic"  # academic, business, casual
+  color_palette: "viridis"
+  max_charts_per_report: 10
+  supported_formats: ["png", "svg", "pdf"]
+
+output:
+  formats: ["markdown", "html", "pdf"]
+  include_metadata: true
+  include_sources: true
+  timestamp_files: true
+
+evaluation:
+  criteria:
+    - "content_quality"
+    - "visual_integration" 
+    - "coherence"
+    - "factual_accuracy"
